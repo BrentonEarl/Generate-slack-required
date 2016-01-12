@@ -35,7 +35,7 @@ describe "The SlackRequired class must find, create, and destroy the correct fil
 
   before do
     @sr = SlackRequired.new('./test/config.cfg')
-    @search = @sr.RecurseTree
+    #@search = @sr.RecurseTree
     @good_file1 = "/home/facerip/Projects/Slackware/Generate-slack-required/test/SlackBuild-mock-repository/section5/app1/application.info"
     @good_file2 = "/home/facerip/Projects/Slackware/Generate-slack-required/test/SlackBuild-mock-repository/section5/app1/slack-required"
     @bad_file1 = "/home/facerip/Projects/Slackware/Generate-slack-required/test/SlackBuild-mock-repository/section5/app1/application.SlackBuild"
@@ -44,11 +44,13 @@ describe "The SlackRequired class must find, create, and destroy the correct fil
   end
 
   it "includes searched info files" do
+    skip "needs to a rewrite"
     @search
     @sr.CorrectFile.must_include @good_file1
   end
 
   it "does not include exluded file types" do
+    skip "needs to a rewrite"
     @search
     @sr.CorrectFile.wont_include @bad_file1
     @sr.CorrectFile.wont_include @bad_file2
@@ -56,22 +58,26 @@ describe "The SlackRequired class must find, create, and destroy the correct fil
   end
 
   it "returns the path of slack-required files" do
+    skip "needs to a rewrite"
     @search
     @sr.SlackRequiredFile.must_include @good_file2
   end
 
   it "returns nil if an empty slack-required file is created" do
+    skip "needs to a rewrite"
     @search
     @sr.CreateSlackRequired.must_equal nil
   end
 
   it "returns 0 if a slack-required file can be emptied" do
+    skip "needs to a rewrite"
     @search
     @sr.CreateSlackRequired
     @sr.EmptySlackRequired.must_equal 0
   end
 
   it "returns 1 if a slack-required file can be destroyed" do
+    skip "needs to a rewrite"
     @search
     @sr.CreateSlackRequired
     @sr.DestroySlackRequired.must_equal 1
