@@ -12,7 +12,7 @@ repository.
 
 Brenton Earl - brent@exitstatusone.com
 
-Much of the code was writen by [Bill Rawlinson in
+Directory traversal code writen by [Bill Rawlinson in
 2007](http://code.rawlinson.us/2007/02/ruby-directory-traversal.html).
 
 
