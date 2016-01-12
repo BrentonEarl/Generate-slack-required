@@ -9,6 +9,7 @@ class SlackRequired
     @includedFileExtensions = IO.readlines(configuration_file)[3].chomp.split(",")
     @excludedFileNames = IO.readlines(configuration_file)[5].chomp.split(",")
     @excludedDirectories = IO.readlines(configuration_file)[7].chomp.split(",")
+    @requires_regex = /REQUIRES\=\".*\"/
   end
 
   def Repository
@@ -47,7 +48,7 @@ class SlackRequired
     @destroySlackRequired = File.delete(@slack_required)
   end
 
-  def RecurseTree
+  def SearchandWrite
     Find.find(@repository) do |path|
       if FileTest.directory?(path)
         # Black list exludes
@@ -66,9 +67,17 @@ class SlackRequired
           @infofile_dir = File.dirname(@infofile)
           @slack_required = @infofile_dir + "/" + "slack-required"
 
-          @requires_regex = /REQUIRES\=\".*\"/
-          @read_infofile = File.readlines(@infofile)
-          @matches = @read_infofile.select { |requires| requires[@requires_regex] }
+          # Not so good.  Reads whole files into memory, resource hog
+          #@read_infofile = File.readlines(@infofile)
+          #@matches = @read_infofile.select { |requires| requires[@requires_regex] }
+
+          # Reads regex line from each file one at a time and writes out
+          # Better with resources
+          File.open(@infofile).each do |requires|
+            @matches = @requires_regex.match(requires)
+            f = File.new(@slack_required, "w")
+            f.write(@matches)
+          end
         end
       end
     end

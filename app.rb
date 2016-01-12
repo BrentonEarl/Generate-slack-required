@@ -2,4 +2,6 @@
 
 require_relative 'lib/slack-required'
 
-SlackRequired.new('test/config.cfg')
+@sr = SlackRequired.new('test/config.cfg')
+
+@search_write = @sr.SearchandWrite
