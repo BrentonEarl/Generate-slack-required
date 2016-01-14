@@ -12,21 +12,7 @@ class SlackRequired
     @requires_regex = /REQUIRES\=\".*\"/
   end
 
-  def Repository
-    @repository
-  end
-
-  def IncludedFileExtensions
-    @includedFileExtensions
-  end
-
-  def ExcludedFileNames
-    @excludedFileNames
-  end
-
-  def ExcludedDirectories
-    @excludedDirectories
-  end
+  attr_reader :repository, :includedFileExtensions, :excludedFileNames, :exludedDirectories
 
   def CorrectFile
     @infofile
